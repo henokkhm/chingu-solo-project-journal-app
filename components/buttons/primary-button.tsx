@@ -1,4 +1,3 @@
-import { Bubblegum_Sans } from "@next/font/google";
 import Image from "next/image";
 import { FC } from "react";
 
