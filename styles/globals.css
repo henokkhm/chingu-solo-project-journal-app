@@ -8,8 +8,21 @@
   /* outline: red solid 1px; */
 }
 
+body {
+  padding: 3em 1em;
+  margin: 0 auto;
+}
+
 @layer components {
-  .btn {
+  .btn-styles {
     @apply flex max-w-sm items-center justify-center rounded-lg  px-6 py-2.5 font-medium text-white  focus:outline-none focus:ring-4;
+  }
+
+  .input-styles {
+    @apply w-full max-w-sm rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900;
+  }
+
+  .label-styles {
+    @apply mb-2 block text-sm font-medium text-gray-900;
   }
 }
