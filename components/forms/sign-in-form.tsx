@@ -2,7 +2,7 @@ import PrimaryButton from "../buttons/primary-button";
 
 function SignInForm() {
   return (
-    <form className="flex w-full min-w-[280px] max-w-sm flex-col space-y-6">
+    <form className="form-styles">
       <div>
         <label htmlFor="user_name" className="label-styles">
           User name:

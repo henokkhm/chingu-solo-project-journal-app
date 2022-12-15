@@ -1,20 +1,20 @@
 import Link from "next/link";
 import SecondaryButton from "../components/buttons/secondary-button";
-import SignInForm from "../components/forms/sign-in-form";
+import SignUpForm from "../components/forms/sign-up-form";
 
-function SignIn() {
+function SignUp() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center space-y-4">
-      <h1 className="pb-8 text-3xl font-bold">Sign In</h1>
-      <SignInForm />
+      <h1 className="pb-8 text-3xl font-bold">Sign Up</h1>
+      <SignUpForm />
       <div className="flex items-center space-y-0 text-sm text-gray-500">
-        Don&#39;t have an account?{" "}
-        <Link href="/sign-up">
-          <SecondaryButton text="Sign Up" />
+        Already have an account?{" "}
+        <Link href="/sign-in">
+          <SecondaryButton text="Sign In" />
         </Link>
       </div>
     </main>
   );
 }
 
-export default SignIn;
+export default SignUp;

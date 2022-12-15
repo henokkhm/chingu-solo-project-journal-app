@@ -25,4 +25,8 @@ body {
   .label-styles {
     @apply mb-2 block text-sm font-medium text-gray-900;
   }
+
+  .form-styles {
+    @apply flex w-full min-w-[280px] max-w-sm flex-col space-y-6;
+  }
 }
