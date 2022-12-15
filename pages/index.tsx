@@ -23,9 +23,13 @@ export default function Home() {
         </h1>
         <div className="flex min-h-screen flex-col items-center justify-center space-y-8">
           <PrimaryButton text="Sign up" />
-          <PrimaryButton danger text="Delete  " />
-          <SecondaryButton text="Edit" />
-          <SecondaryButton danger text="Delete" />
+          <PrimaryButton danger text="Delete" />
+          <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
+          <SecondaryButton
+            danger
+            text="Delete"
+            iconUrl="/svg-icons/trash.svg"
+          />
         </div>
       </main>
     </>
