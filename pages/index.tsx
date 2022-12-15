@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 import PrimaryButton from "../components/buttons/primary-button";
 import SecondaryButton from "../components/buttons/secondary-button";
+import Journal from "../components/journal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,11 +25,10 @@ export default function Home() {
         <div className="flex min-h-screen flex-col items-center justify-center space-y-8">
           <PrimaryButton text="Sign up" />
           <PrimaryButton danger text="Delete" />
-          <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
-          <SecondaryButton
-            danger
-            text="Delete"
-            iconUrl="/svg-icons/trash.svg"
+          <Journal
+            title="Note Title"
+            body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque blandit neque ligula, posuere faucibus sem accumsan eu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+            id="1234"
           />
         </div>
       </main>
