@@ -5,5 +5,11 @@
 *,
 *::before,
 *::after {
-  outline: red solid 1px;
+  /* outline: red solid 1px; */
+}
+
+@layer components {
+  .btn {
+    @apply flex max-w-sm items-center justify-center rounded-lg  px-6 py-2.5 font-medium text-white  focus:outline-none focus:ring-4;
+  }
 }

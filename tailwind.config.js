@@ -5,7 +5,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "custom-blue": "#007ae6",
+        "custom-blue-hover": "#02549c",
+        "custom-red": "#ea2e4c",
+        "custom-red-hover": "#b33348",
+      },
+    },
   },
   plugins: [],
 };
