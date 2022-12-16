@@ -1,15 +1,10 @@
 import { FC } from "react";
+import { JournalType } from "../types/journal";
 import SecondaryButton from "./buttons/secondary-button";
 
-interface JournalProps {
-  title: string;
-  body: string;
-  id: string;
-}
-
-const Journal: FC<JournalProps> = ({ title, body, id }) => {
+const Journal: FC<JournalType> = ({ title, body, id }) => {
   return (
-    <div className="w-full min-w-[250px] max-w-sm rounded border">
+    <div className="mb-6 w-full min-w-[250px] rounded border">
       <div className="rounded-t bg-[#4A688E] p-4">
         <h2 className="font-bold text-white">{title}</h2>
       </div>

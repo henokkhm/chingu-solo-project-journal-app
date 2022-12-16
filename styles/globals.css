@@ -9,9 +9,9 @@
 }
 
 body {
-  padding: 3em 1em;
+  padding: 3em 2em;
   margin: 0 auto;
-  max-width: 920px;
+  max-width: 1440px;
   min-width: 280px;
 }
 
@@ -31,4 +31,16 @@ body {
   .form-styles {
     @apply flex w-full min-w-[280px] flex-col space-y-6;
   }
+}
+
+.my-masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
 }

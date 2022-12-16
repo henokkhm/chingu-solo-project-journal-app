@@ -5,6 +5,8 @@ import Header from "../components/header";
 import JournalForm from "../components/forms/journal-form";
 
 import journalData from "../journalData.json";
+import Masonry from "react-masonry-css";
+import JournalsWrapper from "../components/journals-wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,33 +24,13 @@ export default function Home() {
       </Head>
       <Header pageTitle={"Create a Note"} />
       <main className="flex flex-col gap-16">
-        {/* 
-        Components: 
-        -----------
-
-        paragraph
-        JournalForm
-        journals wrapper
-          journals 
-          
-        */}
         <p className="pb-6 leading-6 text-gray-800">
           Use the form below to create a journal. Make sure that you fill the
           required title and body fields.
         </p>
 
         <JournalForm />
-
-        <div className="flex flex-wrap gap-6 ">
-          {journalData.map((journal) => (
-            <Journal
-              title={journal.title}
-              body={journal.body}
-              key={journal.id}
-              id={journal.id}
-            />
-          ))}
-        </div>
+        <JournalsWrapper journalArray={journalData} />
       </main>
     </>
   );
