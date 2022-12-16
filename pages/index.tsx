@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import PrimaryButton from "../components/buttons/primary-button";
 import Journal from "../components/journal";
 import Header from "../components/header";
 import JournalForm from "../components/forms/journal-form";
+
+import journalData from "../journalData.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header pageTitle={"Create a Note"} />
-      <main className="">
+      <main className="flex flex-col gap-16">
         {/* 
         Components: 
         -----------
@@ -37,6 +38,17 @@ export default function Home() {
         </p>
 
         <JournalForm />
+
+        <div className="flex flex-wrap gap-6 ">
+          {journalData.map((journal) => (
+            <Journal
+              title={journal.title}
+              body={journal.body}
+              key={journal.id}
+              id={journal.id}
+            />
+          ))}
+        </div>
       </main>
     </>
   );

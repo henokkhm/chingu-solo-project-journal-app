@@ -1,0 +1,91 @@
+[
+  {
+    "id": "1",
+    "title": "Journal Title 1",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non viverra nulla. Donec eget nibh ligula. In massa diam, fermentum ut ipsum eu, gravida tincidunt turpis. Nam sed porttitor sem. In convallis, velit ac interdum venenatis, quam urna laoreet risus, eu aliquet metus nisl quis nisi. In id molestie eros."
+  },
+
+  {
+    "id": "2",
+    "title": "Journal Title 2",
+    "body": "Cras volutpat lobortis enim a vulputate."
+  },
+
+  {
+    "id": "3",
+    "title": "Journal Title 3",
+    "body": "Maecenas venenatis arcu ut consequat imperdiet. Duis fringilla mauris sed condimentum bibendum. Vivamus condimentum mauris sed odio placerat bibendum."
+  },
+
+  {
+    "id": "4",
+    "title": "Journal Title 4",
+    "body": "Aliquam ac vestibulum justo. Fusce diam mi, convallis a odio non, finibus aliquam ipsum. Nam posuere nisl nec ante ullamcorper pellentesque. Quisque tincidunt tortor consectetur malesuada convallis. Quisque vestibulum neque in eros scelerisque, nec porta quam commodo."
+  },
+
+  {
+    "id": "5",
+    "title": "Journal Title 5",
+    "body": "Morbi sit amet sem molestie, mattis odio nec, scelerisque risus. Aliquam aliquam, metus sit amet venenatis mattis, risus nulla vestibulum sem, a varius orci arcu vitae ante. Aenean malesuada, magna placerat faucibus facilisis, lorem ligula dapibus lectus, et viverra mi arcu id nibh. Phasellus in tempor velit. Fusce malesuada lacinia purus, at eleifend arcu mattis in. Quisque sed orci odio. Phasellus sit amet risus euismod, placerat velit id, luctus sapien."
+  },
+
+  {
+    "id": "6",
+    "title": "Journal Title 6",
+    "body": "Donec sagittis cursus maximus. Proin sit amet dolor arcu. Donec id dapibus leo. Duis ut placerat ipsum. Phasellus blandit diam id nunc convallis sodales. Morbi vehicula eu odio placerat tempor. Sed rhoncus nibh in est consequat, in malesuada erat commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut varius purus leo, blandit porta arcu varius et. Quisque ultrices maximus dolor, vel sagittis diam venenatis non."
+  },
+
+  {
+    "id": "7",
+    "title": "Journal Title 7",
+    "body": "Nam sodales velit eu diam imperdiet, nec euismod velit rutrum. Phasellus consequat porta tortor, finibus molestie enim varius in. Maecenas lacinia dolor lectus, in aliquet elit maximus a."
+  },
+
+  {
+    "id": "8",
+    "title": "Journal Title 8",
+    "body": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean placerat volutpat orci, sit amet porta odio elementum sit amet. Vestibulum sagittis sapien velit, nec efficitur eros congue lobortis. Sed vitae nibh quis turpis fermentum rutrum ultrices nec libero."
+  },
+
+  {
+    "id": "9",
+    "title": "Journal Title 9",
+    "body": "Praesent lacinia consectetur fringilla. In volutpat enim tortor, in sagittis tellus pharetra non. Aliquam ultrices odio id nisi aliquet, ac fermentum ante fringilla. Nunc id egestas nibh. Aliquam posuere eu justo id dignissim. Etiam consequat vel lectus ac interdum. Donec nec dignissim enim."
+  },
+
+  {
+    "id": "10",
+    "title": "Journal Title 10",
+    "body": "Cras volutpat lobortis enim a vulputate. Ut nisl eros, egestas sit amet elementum in, luctus eu nulla."
+  },
+
+  {
+    "id": "11",
+    "title": "Journal Title 11",
+    "body": "Vivamus maximus quam vel arcu ullamcorper, id varius velit ornare. Aliquam porttitor eros urna, ac aliquam magna facilisis vel. Quisque sit amet leo vel ante convallis laoreet id in nunc. Vivamus sed dapibus dolor. Aliquam libero tellus, lobortis nec pretium nec, tempor in dui. Nulla semper laoreet ullamcorper. Fusce eget finibus velit. Cras placerat pharetra orci eget commodo."
+  },
+
+  {
+    "id": "12",
+    "title": "Journal Title 12",
+    "body": "Cras feugiat ullamcorper sapien, sed pretium arcu scelerisque sit amet. Morbi luctus lobortis purus, vitae semper libero tempus quis. Donec at vulputate urna, id condimentum justo. Vestibulum sagittis sapien velit, nec efficitur eros congue lobortis. Sed vitae nibh quis turpis fermentum rutrum ultrices nec libero."
+  },
+
+  {
+    "id": "13",
+    "title": "Journal Title 13",
+    "body": "Praesent lacinia consectetur fringilla. In volutpat enim tortor, in sagittis tellus pharetra non. Aliquam ultrices odio id nisi aliquet, ac fermentum ante fringilla. Nunc id egestas nibh. Aliquam posuere eu justo id dignissim. Etiam consequat vel lectus ac interdum."
+  },
+
+  {
+    "id": "14",
+    "title": "Journal Title 14",
+    "body": "Vestibulum sagittis sapien velit, nec efficitur eros congue lobortis. Sed vitae nibh quis turpis fermentum rutrum ultrices nec libero."
+  },
+
+  {
+    "id": "15",
+    "title": "Journal Title 15",
+    "body": "Praesent lacinia consectetur fringilla. In volutpat enim tortor, in sagittis tellus pharetra non. Aliquam ultrices odio id nisi aliquet, ac fermentum ante fringilla. Nunc id egestas nibh. Aliquam posuere eu justo id dignissim. Etiam consequat vel lectus ac interdum. Donec nec dignissim enim."
+  }
+]
