@@ -15,7 +15,7 @@ const PrimaryButton: FC<ButtonProps> = ({ text, iconUrl, danger }) => {
   return (
     <button type="button" className={`btn-styles ${colors}`}>
       {iconUrl && (
-        <Image src={iconUrl} className="mr-2" alt="" width="10" height="10" />
+        <Image src={iconUrl} className="mr-2" alt="" width="16" height="16" />
       )}
       {text}
     </button>

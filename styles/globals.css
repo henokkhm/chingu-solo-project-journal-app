@@ -11,6 +11,8 @@
 body {
   padding: 3em 1em;
   margin: 0 auto;
+  max-width: 800px;
+  min-width: 280px;
 }
 
 @layer components {
@@ -19,7 +21,7 @@ body {
   }
 
   .input-styles {
-    @apply w-full max-w-sm rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900;
+    @apply w-full  rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900;
   }
 
   .label-styles {
@@ -27,6 +29,6 @@ body {
   }
 
   .form-styles {
-    @apply flex w-full min-w-[280px] max-w-sm flex-col space-y-6;
+    @apply flex w-full min-w-[280px] flex-col space-y-6;
   }
 }

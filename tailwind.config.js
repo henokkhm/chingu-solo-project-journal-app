@@ -12,6 +12,9 @@ module.exports = {
         "custom-red": "#ea2e4c",
         "custom-red-hover": "#b33348",
       },
+      screens: {
+        "custom-sm": "430px",
+      },
     },
   },
   plugins: [],
