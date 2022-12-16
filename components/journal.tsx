@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import { JournalType } from "../types/journal";
 import SecondaryButton from "./buttons/secondary-button";
@@ -10,8 +11,16 @@ const Journal: FC<JournalType> = ({ title, body, id }) => {
       </div>
       <div className="p-4 pb-8 text-gray-600">{body}</div>
       <div className="flex items-center justify-between rounded-b bg-[#F3F7FB] align-bottom">
-        <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
-        <SecondaryButton danger text="Delete" iconUrl="/svg-icons/trash.svg" />
+        <Link href={`/${id}/edit`}>
+          <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
+        </Link>
+        <Link href={`/${id}/delete`}>
+          <SecondaryButton
+            danger
+            text="Delete"
+            iconUrl="/svg-icons/trash.svg"
+          />
+        </Link>
       </div>
     </div>
   );
