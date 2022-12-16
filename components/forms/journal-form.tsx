@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PrimaryButton from "../buttons/primary-button";
 
 function JournalForm() {
@@ -27,7 +28,19 @@ function JournalForm() {
           text="Save Journal"
           iconUrl="/svg-icons/floppy-disk.svg"
         />
-        <PrimaryButton danger text="Discard" iconUrl="/svg-icons/go-back.svg" />
+        <Link href="/">
+          <PrimaryButton
+            danger
+            text="Discard"
+            iconUrl="/svg-icons/go-back.svg"
+            onClick={
+              () =>
+                console.log(
+                  "I got clickd"
+                ) /* TODO: reset entered values to empty strings */
+            }
+          />
+        </Link>
       </div>
     </form>
   );
