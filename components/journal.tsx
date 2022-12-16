@@ -11,10 +11,13 @@ const Journal: FC<JournalType> = ({ title, body, id }) => {
       </div>
       <div className="p-4 pb-8 text-gray-600">{body}</div>
       <div className="flex items-center justify-between rounded-b bg-[#f9fafa] align-bottom">
-        <Link href={`/${id}/edit`}>
+        <Link href={`/${id}/edit`} aria-label={`Edit journal with id ${id}`}>
           <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
         </Link>
-        <Link href={`/${id}/delete`}>
+        <Link
+          href={`/${id}/delete`}
+          aria-label={`Delete journal with id ${id}`}
+        >
           <SecondaryButton
             danger
             text="Delete"
