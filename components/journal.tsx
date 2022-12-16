@@ -10,7 +10,7 @@ const Journal: FC<JournalType> = ({ title, body, id }) => {
         <h2 className="font-bold text-white">{title}</h2>
       </div>
       <div className="p-4 pb-8 text-gray-600">{body}</div>
-      <div className="flex items-center justify-between rounded-b bg-[#F3F7FB] align-bottom">
+      <div className="flex items-center justify-between rounded-b bg-[#f9fafa] align-bottom">
         <Link href={`/${id}/edit`}>
           <SecondaryButton text="Edit" iconUrl="/svg-icons/pencil.svg" />
         </Link>

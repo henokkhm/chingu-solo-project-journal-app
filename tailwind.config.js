@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "custom-blue": "#007ae6",
+        "custom-blue": "#0370d0",
         "custom-blue-hover": "#02549c",
-        "custom-red": "#ea2e4c",
+        "custom-red": "#d02743",
         "custom-red-hover": "#b33348",
       },
       screens: {
