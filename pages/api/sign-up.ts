@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { baseUrl, fetchBody, fetchOptions } from "../../utils/mongo-db-utils";
+import { getPasswordHash } from "../../utils/bcrypt-utils";
 
 type Data = {
   message: string;
@@ -50,7 +51,6 @@ export default async function handler(
           return res.status(400).json({ message: "Username is already taken" });
         }
 
-        // TODO: create password hash
         // save new user and hashed password to database
         // @ts-ignore
         const insertUser = await fetch(`${baseUrl}/insertOne`, {
@@ -58,7 +58,10 @@ export default async function handler(
           body: JSON.stringify({
             ...fetchBody,
             collection: "users",
-            document: newUser,
+            document: {
+              username: newUser.username,
+              passwordHash: await getPasswordHash(newUser.password),
+            },
           }),
         });
         const insertUserJson = await insertUser.json();
