@@ -1,14 +1,9 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import Journal from "../components/journal";
 import Header from "../components/header";
 import JournalForm from "../components/forms/journal-form";
 
 import journalData from "../journalData.json";
-import Masonry from "react-masonry-css";
 import JournalsWrapper from "../components/journals-wrapper";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
