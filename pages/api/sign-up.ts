@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { baseUrl, fetchBody, fetchOptions } from "../../utils/mongo-db-utils";
 import { getPasswordHash } from "../../utils/bcrypt-utils";
+import { getUserByUsernameFromDB, writeUserToDB } from "../../data-layer/user";
 
 type Data = {
   message: string;
@@ -34,37 +34,18 @@ export default async function handler(
         }
 
         // check if username is available by querying the database
-        // @ts-ignore
-        const previouslyRegisteredUserData = await fetch(`${baseUrl}/find`, {
-          ...fetchOptions,
-          body: JSON.stringify({
-            ...fetchBody,
-            collection: "users",
-            filter: { username: newUser.username },
-          }),
-        });
+        const previouslyRegisteredUser = await getUserByUsernameFromDB(
+          newUser.username
+        );
 
-        const previouslyRegisteredUser =
-          await previouslyRegisteredUserData.json();
-
-        if (previouslyRegisteredUser.documents.length) {
+        if (previouslyRegisteredUser.document) {
           return res.status(400).json({ message: "Username is already taken" });
         }
 
         // save new user and hashed password to database
-        // @ts-ignore
-        const insertUser = await fetch(`${baseUrl}/insertOne`, {
-          ...fetchOptions,
-          body: JSON.stringify({
-            ...fetchBody,
-            collection: "users",
-            document: {
-              username: newUser.username,
-              passwordHash: await getPasswordHash(newUser.password),
-            },
-          }),
-        });
-        const insertUserJson = await insertUser.json();
+        const passwordHash = await getPasswordHash(newUser.password);
+        await writeUserToDB(newUser.username, passwordHash);
+
         return res.status(200).json({
           message: "Success: A new user has been created",
         });
