@@ -21,6 +21,7 @@ export function checkPasswordHash(
   passwordAttempt: string
 ) {
   return new Promise((resolve, reject) => {
+    console.log({ passwordAttempt, passwordHash: user.passwordHash });
     bcrypt
       .compare(passwordAttempt, user.passwordHash)
       .then(function (result) {
