@@ -5,6 +5,7 @@ interface ButtonProps {
   text: string;
   iconUrl?: string;
   danger?: boolean;
+  type?: "button" | "submit" | "reset";
   loading?: boolean;
   onClick?: MouseEventHandler;
 }
@@ -14,6 +15,7 @@ const PrimaryButton: FC<ButtonProps> = ({
   iconUrl,
   danger,
   loading,
+  type,
   onClick,
 }) => {
   const colors = danger
@@ -25,7 +27,7 @@ const PrimaryButton: FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      type="button"
+      type={type || "button"}
       disabled={loading}
       className={`btn-styles ${colors}`}
     >
