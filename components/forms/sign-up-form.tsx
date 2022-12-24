@@ -20,31 +20,37 @@ function SignUpForm() {
           .oneOf([Yup.ref("password"), null], "Passwords must match")
           .required("Please confirm your password"),
       })}
-      onSubmit={(values, { setSubmitting, setErrors }) => {
-        fetch("/api/sign-up", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        })
-          .then((data) => data.json())
-          .then((jsonData) => {
-            if (jsonData.message === "Success: A new user has been created") {
-              router.push("/sign-in");
-            } else if (jsonData.message === "Username is already taken") {
-              setErrors({
-                userName:
-                  "That username has already been taken, please try a different one.",
-              });
-            }
-          })
-          .catch((error) => {
-            console.log("Unhandled error:", error);
-          })
-          .finally(() => {
-            setSubmitting(false);
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
+        try {
+          const response = await fetch("/api/sign-up", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
           });
+
+          const jsonData = await response.json();
+
+          setSubmitting(false);
+
+          if (
+            response.status === 201 &&
+            jsonData.message === "Success: A new user has been created"
+          ) {
+            router.push("/sign-in");
+          } else if (
+            response.status === 400 &&
+            jsonData.message === "Username is already taken"
+          ) {
+            setErrors({
+              userName:
+                "That username has already been taken, please try a different one.",
+            });
+          }
+        } catch (err) {
+          console.log("Unknown error: ", err);
+        }
       }}
     >
       {({ isSubmitting }) => (
