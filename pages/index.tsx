@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Header pageTitle={"Create a Note"} />
       <main className="flex flex-col gap-16">
-        <p className="pb-6 leading-6 text-gray-800">
+        <p className="leading-6 text-gray-800">
           Use the form below to create a journal. Make sure that you fill the
           required title and body fields.
         </p>
