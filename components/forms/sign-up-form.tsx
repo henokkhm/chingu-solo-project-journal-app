@@ -2,15 +2,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import PrimaryButton from "../buttons/primary-button";
 
-interface FormFieldValues {
-  userName: string;
-  password: string;
-}
-
 function SignUpForm() {
   return (
     <Formik
-      initialValues={{ userName: "", password: "" }}
+      initialValues={{ userName: "", password: "", passwordConfirmation: "" }}
       validationSchema={Yup.object({
         userName: Yup.string()
           .min(5, "Username must be at least 5 characters")
@@ -19,6 +14,9 @@ function SignUpForm() {
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("A password is required"),
+        passwordConfirmation: Yup.string()
+          .oneOf([Yup.ref("password"), null], "Passwords must match")
+          .required("Please confirm your password"),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -50,6 +48,22 @@ function SignUpForm() {
               component="div"
               className="py-2 text-sm text-red-700"
               name="password"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="passwordConfirmation" className="label-styles">
+              Confirm Password
+            </label>
+            <Field
+              name="passwordConfirmation"
+              type="password"
+              className="input-styles"
+            />
+            <ErrorMessage
+              component="div"
+              className="py-2 text-sm text-red-700"
+              name="passwordConfirmation"
             />
           </div>
 
