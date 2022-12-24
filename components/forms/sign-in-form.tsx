@@ -1,10 +1,12 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { useSnackbar } from "../../context/snackbar-context";
 import PrimaryButton from "../buttons/primary-button";
 
 function SignInForm() {
   const router = useRouter();
+  const { setSnackbarMessage } = useSnackbar();
   return (
     <Formik
       initialValues={{ userName: "", password: "" }}
@@ -31,6 +33,7 @@ function SignInForm() {
             jsonData.message === "Successfully logged in"
           ) {
             router.push("/");
+            setSnackbarMessage("You have successfully signed in!", "success");
           } else if (
             response.status === 400 &&
             jsonData.message === "Invalid username or password"

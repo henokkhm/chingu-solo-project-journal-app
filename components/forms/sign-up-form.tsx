@@ -1,10 +1,12 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { useSnackbar } from "../../context/snackbar-context";
 import PrimaryButton from "../buttons/primary-button";
 
 function SignUpForm() {
   const router = useRouter();
+  const { setSnackbarMessage } = useSnackbar();
   return (
     <Formik
       initialValues={{ userName: "", password: "", passwordConfirmation: "" }}
@@ -39,6 +41,10 @@ function SignUpForm() {
             jsonData.message === "Success: A new user has been created"
           ) {
             router.push("/sign-in");
+            setSnackbarMessage(
+              "You have successfully created a new user account!",
+              "success"
+            );
           } else if (
             response.status === 400 &&
             jsonData.message === "Username is already taken"
