@@ -27,7 +27,7 @@ export default async function handler(
             .status(400)
             .json({ message: "Missing username and password" });
         }
-        if (!user.username) {
+        if (!user.userName) {
           return res.status(400).json({ message: "Missing username" });
         }
 
@@ -36,7 +36,7 @@ export default async function handler(
         }
 
         // get user from db and compare password hash
-        const userFromDB = await getUserByUsernameFromDB(user.username);
+        const userFromDB = await getUserByUsernameFromDB(user.userName);
         if (!userFromDB.document) {
           return res
             .status(400)
@@ -53,7 +53,7 @@ export default async function handler(
         const sessionId = uuidv4();
 
         // add session to sessions collection
-        await writeSessionToDB(sessionId, user.username);
+        await writeSessionToDB(sessionId, user.userName);
 
         res
           .status(201)
