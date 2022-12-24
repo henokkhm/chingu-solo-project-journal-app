@@ -1,8 +1,10 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useRouter } from "next/router";
 import * as Yup from "yup";
 import PrimaryButton from "../buttons/primary-button";
 
 function SignUpForm() {
+  const router = useRouter();
   return (
     <Formik
       initialValues={{ userName: "", password: "", passwordConfirmation: "" }}
@@ -18,11 +20,31 @@ function SignUpForm() {
           .oneOf([Yup.ref("password"), null], "Passwords must match")
           .required("Please confirm your password"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        fetch("/api/sign-up", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        })
+          .then((data) => data.json())
+          .then((jsonData) => {
+            if (jsonData.message === "Success: A new user has been created") {
+              router.push("/sign-in");
+            } else if (jsonData.message === "Username is already taken") {
+              setErrors({
+                userName:
+                  "That username has already been taken, please try a different one.",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log("Unhandled error:", error);
+          })
+          .finally(() => {
+            setSubmitting(false);
+          });
       }}
     >
       {({ isSubmitting }) => (

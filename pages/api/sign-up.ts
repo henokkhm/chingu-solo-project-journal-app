@@ -25,7 +25,7 @@ export default async function handler(
             .status(400)
             .json({ message: "Missing username and password" });
         }
-        if (!newUser.username) {
+        if (!newUser.userName) {
           return res.status(400).json({ message: "Missing username" });
         }
 
@@ -35,7 +35,7 @@ export default async function handler(
 
         // check if username is available by querying the database
         const previouslyRegisteredUser = await getUserByUsernameFromDB(
-          newUser.username
+          newUser.userName
         );
 
         if (previouslyRegisteredUser.document) {
@@ -44,9 +44,9 @@ export default async function handler(
 
         // save new user and hashed password to database
         const passwordHash = await getPasswordHash(newUser.password);
-        await writeUserToDB(newUser.username, passwordHash);
+        await writeUserToDB(newUser.userName, passwordHash);
 
-        return res.status(200).json({
+        return res.status(201).json({
           message: "Success: A new user has been created",
         });
         break;
