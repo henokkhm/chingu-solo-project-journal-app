@@ -67,3 +67,5 @@ export async function getServerSideProps({
     props: { journals: data.documents },
   };
 }
+
+export default Home;
