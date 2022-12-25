@@ -4,7 +4,7 @@ import Cookies from "cookies";
 import { getAuthenticatedUser } from "../../../../utils/auth-helpers";
 import {
   getJournalByIdFromDB,
-  updateJournalInDb,
+  deleteJournalFromDb,
 } from "../../../../data-layer/journal";
 
 type Data = {
@@ -17,7 +17,7 @@ export default async function handler(
 ) {
   try {
     switch (req.method) {
-      case "POST":
+      case "DELETE":
         const cookies = new Cookies(req, res);
         const sessionId = cookies.get("sessionId");
 
@@ -26,23 +26,6 @@ export default async function handler(
 
         if (!authenticated) {
           return res.status(401).json({ message: "You are not signed in" });
-        }
-
-        const data = req.body;
-
-        // validate user input
-        if (!data) {
-          return res
-            .status(400)
-            .json({ message: "Journal title and body are missing" });
-        }
-
-        if (!data.journalTitle) {
-          return res.status(400).json({ message: "Journal title is missing" });
-        }
-
-        if (!data.journalBody) {
-          return res.status(400).json({ message: "Journal body is missing" });
         }
 
         // check if user owns this journal before they're allowed to update it
@@ -57,18 +40,18 @@ export default async function handler(
         if (journal.createdBy !== authenticatedUserName) {
           return res
             .status(401)
-            .json({ message: "You are not authorized to update this journal" });
+            .json({ message: "You are not authorized to delete this journal" });
         }
 
-        await updateJournalInDb(journalId, data.journalTitle, data.journalBody);
+        await deleteJournalFromDb(journalId);
 
-        return res.status(200).json({ message: "Journal updated sucessfully" });
+        return res.status(200).json({ message: "Journal deleted sucessfully" });
         break;
       default:
         return res.status(405).json({ message: "Method not supported" });
     }
   } catch (e) {
-    console.log("Error in edit journal handler", e);
+    console.log("Error in delete journal handler", e);
     return res.status(500).json({ message: "Internal server error" });
   }
 }

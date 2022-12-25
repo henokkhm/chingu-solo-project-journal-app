@@ -55,7 +55,7 @@ export async function deleteJournalFromDb(id: string) {
     body: JSON.stringify({
       ...fetchBody,
       collection: "journals",
-      filter: { _id: id },
+      filter: { _id: { $oid: id } },
     }),
   });
   return await deleteJournal.json();
