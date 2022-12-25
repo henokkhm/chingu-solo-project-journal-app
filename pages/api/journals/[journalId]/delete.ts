@@ -30,6 +30,7 @@ export default async function handler(
 
         // check if user owns this journal before they're allowed to update it
         const { journalId } = req.query;
+        // @ts-ignore
         const item = await getJournalByIdFromDB(journalId);
         const journal = item.document;
 
@@ -43,6 +44,7 @@ export default async function handler(
             .json({ message: "You are not authorized to delete this journal" });
         }
 
+        // @ts-ignore
         await deleteJournalFromDb(journalId);
 
         return res.status(200).json({ message: "Journal deleted sucessfully" });
