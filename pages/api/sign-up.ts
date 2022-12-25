@@ -16,7 +16,6 @@ export default async function handler(
   try {
     switch (req.method) {
       case "POST":
-        // TODO: Check user is NOT signed in. Only signed out users can create a new user
         const cookies = new Cookies(req, res);
         const sessionId = cookies.get("sessionId");
         const { authenticated } = await getAuthenticatedUser(sessionId);
@@ -28,7 +27,6 @@ export default async function handler(
           });
         }
 
-        // Grab the user object
         const newUser = req.body;
 
         // Validate the user data

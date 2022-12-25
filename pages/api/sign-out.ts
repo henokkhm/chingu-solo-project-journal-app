@@ -22,9 +22,7 @@ export default async function handler(
         // check the user is signed in
         const { authenticated } = await getAuthenticatedUser(sessionId);
         if (!authenticated) {
-          return res
-            .status(400)
-            .json({ message: "You are already signed out" });
+          return res.status(401).json({ message: "You are not signed in" });
         }
 
         await deleteSessionFromDb(sessionId);

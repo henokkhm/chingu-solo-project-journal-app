@@ -4,20 +4,33 @@ import Link from "next/link";
 import PrimaryButton from "../buttons/primary-button";
 import { useRouter } from "next/router";
 import { useSnackbar } from "../../context/snackbar-context";
+import { FC } from "react";
 
-function JournalForm() {
+interface JournalFormProps {
+  onSuccess: () => void;
+  submitUrl: string;
+  title?: string;
+  body?: string;
+}
+
+const JournalForm: FC<JournalFormProps> = ({
+  onSuccess,
+  submitUrl,
+  title,
+  body,
+}) => {
   const { setSnackbarMessage } = useSnackbar();
   const router = useRouter();
   return (
     <Formik
-      initialValues={{ journalTitle: "", journalBody: "" }}
+      initialValues={{ journalTitle: title || "", journalBody: body || "" }}
       validationSchema={Yup.object({
         journalTitle: Yup.string().required("A title is required"),
         journalBody: Yup.string().required("Body is required"),
       })}
-      onSubmit={async (values, { setSubmitting, setErrors }) => {
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          const response = await fetch("/api/journals/create", {
+          const response = await fetch(submitUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -25,26 +38,19 @@ function JournalForm() {
             body: JSON.stringify(values),
           });
 
-          const jsonData = await response.json();
+          await response.json();
 
           setSubmitting(false);
-          console.log(jsonData);
 
-          // if (
-          //   response.status === 201 &&
-          //   jsonData.message === "Successfully logged in"
-          // ) {
-          //   router.push("/");
-          //   setSnackbarMessage("You have successfully signed in!", "success");
-          // } else if (
-          //   response.status === 400 &&
-          //   jsonData.message === "Invalid username or password"
-          // ) {
-          //   setErrors({
-          //     userName: "Invalid username or password",
-          //     password: "Invalid username or password",
-          //   });
-          // }
+          onSuccess();
+
+          if (response.status === 201 || response.status === 200) {
+            resetForm();
+            setSnackbarMessage("Your journal has been saved!", "success");
+          } else if (response.status === 401) {
+            setSnackbarMessage("You should log in first!", "error");
+            router.push("/sign-in");
+          }
         } catch (err) {
           console.log("Unknown error: ", err);
         }
@@ -101,6 +107,6 @@ function JournalForm() {
       )}
     </Formik>
   );
-}
+};
 
 export default JournalForm;

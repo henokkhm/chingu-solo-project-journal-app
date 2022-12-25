@@ -1,10 +1,20 @@
+import Cookies from "cookies";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { useRouter } from "next/router";
+
 import Header from "../components/header";
 import JournalForm from "../components/forms/journal-form";
-
-import journalData from "../journalData.json";
 import JournalsWrapper from "../components/journals-wrapper";
+import { getAuthenticatedUser } from "../utils/auth-helpers";
+import { getAllJounalsOfUser } from "../data-layer/journal";
 
-export default function Home() {
+export default function Home({ journals }) {
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <>
       <Header pageTitle={"Create a Note"} />
@@ -14,9 +24,40 @@ export default function Home() {
           required title and body fields.
         </p>
 
-        <JournalForm />
-        <JournalsWrapper journalArray={journalData} />
+        <JournalForm submitUrl="/api/journals/create" onSuccess={refreshData} />
+        <JournalsWrapper journalArray={journals} />
       </main>
     </>
   );
+}
+
+export async function getServerSideProps({
+  req,
+  res,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) {
+  const cookies = new Cookies(req, res);
+  const sessionId = cookies.get("sessionId");
+
+  const { authenticated, authenticatedUserName } = await getAuthenticatedUser(
+    sessionId
+  );
+
+  if (!authenticated) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props: {},
+    };
+  }
+
+  const data = await getAllJounalsOfUser(authenticatedUserName);
+
+  return {
+    props: { journals: data.documents },
+  };
 }

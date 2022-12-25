@@ -20,6 +20,6 @@ export async function getAuthenticatedUser(sessionId: string | undefined) {
 
   return {
     authenticated: true,
-    athenticatedUserName: user.document.username,
+    authenticatedUserName: user.document.username,
   };
 }

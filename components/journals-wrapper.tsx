@@ -13,6 +13,16 @@ const JournalsWrapper: FC<JournalWrapperProps> = ({ journalArray }) => {
     1200: 2,
     720: 1,
   };
+
+  if (!journalArray.length) {
+    return (
+      <div className="py-4 text-xl font-bold">
+        You have no saved journals yet! Please, use the form above to save new
+        journals.
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2 className="pt-2 pb-8 text-center text-3xl font-medium custom-sm:text-left">
@@ -27,7 +37,7 @@ const JournalsWrapper: FC<JournalWrapperProps> = ({ journalArray }) => {
           <Journal
             title={journal.title}
             body={journal.body}
-            key={journal.id}
+            key={journal._id}
             id={journal.id}
           />
         ))}
