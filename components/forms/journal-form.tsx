@@ -2,8 +2,12 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import PrimaryButton from "../buttons/primary-button";
+import { useRouter } from "next/router";
+import { useSnackbar } from "../../context/snackbar-context";
 
 function JournalForm() {
+  const { setSnackbarMessage } = useSnackbar();
+  const router = useRouter();
   return (
     <Formik
       initialValues={{ journalTitle: "", journalBody: "" }}
@@ -11,11 +15,39 @@ function JournalForm() {
         journalTitle: Yup.string().required("A title is required"),
         journalBody: Yup.string().required("Body is required"),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+      onSubmit={async (values, { setSubmitting, setErrors }) => {
+        try {
+          const response = await fetch("/api/journals/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          });
+
+          const jsonData = await response.json();
+
           setSubmitting(false);
-        }, 400);
+          console.log(jsonData);
+
+          // if (
+          //   response.status === 201 &&
+          //   jsonData.message === "Successfully logged in"
+          // ) {
+          //   router.push("/");
+          //   setSnackbarMessage("You have successfully signed in!", "success");
+          // } else if (
+          //   response.status === 400 &&
+          //   jsonData.message === "Invalid username or password"
+          // ) {
+          //   setErrors({
+          //     userName: "Invalid username or password",
+          //     password: "Invalid username or password",
+          //   });
+          // }
+        } catch (err) {
+          console.log("Unknown error: ", err);
+        }
       }}
     >
       {({ isSubmitting, resetForm }) => (

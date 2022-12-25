@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import Cookies from "cookies";
 import { v4 as uuidv4 } from "uuid";
+
 import { writeSessionToDB } from "../../data-layer/session";
 import { getUserByUsernameFromDB } from "../../data-layer/user";
-
 import { checkPasswordHash } from "../../utils/bcrypt-utils";
 
 type Data = {
@@ -55,10 +56,13 @@ export default async function handler(
         // add session to sessions collection
         await writeSessionToDB(sessionId, user.userName);
 
-        res
-          .status(201)
-          .setHeader("Set-Cookie", sessionId)
-          .json({ message: "Successfully logged in" });
+        // send cookie to frontend
+        const cookies = new Cookies(req, res);
+        cookies.set("sessionId", sessionId, {
+          httpOnly: true,
+        });
+
+        res.status(201).json({ message: "Successfully logged in" });
         break;
       default:
         return res.status(405).json({ message: "Method not supported" });

@@ -29,3 +29,16 @@ export async function writeSessionToDB(sessionId: string, username: string) {
 
   return await insertSession.json();
 }
+
+export async function deleteSessionFromDb(sessionId: string) {
+  // @ts-ignore
+  const deleteSession = await fetch(`${baseUrl}/deleteOne`, {
+    ...fetchOptions,
+    body: JSON.stringify({
+      ...fetchBody,
+      collection: "sessions",
+      filter: { sessionId },
+    }),
+  });
+  return await deleteSession.json();
+}
