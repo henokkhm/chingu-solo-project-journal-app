@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import Cookies from "cookies";
 
 import { deleteSessionFromDb } from "../../data-layer/session";
+import { getAuthenticatedUser } from "../../utils/auth-helpers";
 
 type Data = {
   message: string;
@@ -15,16 +16,19 @@ export default async function handler(
     switch (req.method) {
       case "DELETE":
         const cookies = new Cookies(req, res);
-        // TODO: Check user is signed in
+
         const sessionId = cookies.get("sessionId");
 
-        if (!sessionId) {
-          return res.status(400).json({ message: "You are not signed in" });
+        // check the user is signed in
+        const { authenticated } = await getAuthenticatedUser(sessionId);
+        if (!authenticated) {
+          return res
+            .status(400)
+            .json({ message: "You are already signed out" });
         }
 
         await deleteSessionFromDb(sessionId);
 
-        // TODO: Delete session from session collection(db)
         cookies.set("sessionId");
         res.status(200).json({ message: "Successfully signed out" });
         break;

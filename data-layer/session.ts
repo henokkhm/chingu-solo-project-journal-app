@@ -7,7 +7,7 @@ export async function getSessionByIdFromDB(sessionId: string) {
     body: JSON.stringify({
       ...fetchBody,
       collection: "sessions",
-      filter: { id: sessionId },
+      filter: { sessionId },
     }),
   });
   return await sessionData.json();

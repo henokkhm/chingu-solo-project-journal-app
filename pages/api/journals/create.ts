@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Cookies from "cookies";
 
+import { getAuthenticatedUserName } from "../../../utils/auth-helpers";
+
 type Data = {
   message: string;
 };
@@ -11,14 +13,17 @@ export default async function handler(
 ) {
   const cookies = new Cookies(req, res);
   const sessionId = cookies.get("sessionId");
-  console.log(`the session id i got back is ${sessionId}`);
+
+  if (!sessionId) {
+    return res.status(400).json({ message: "You are not signed in" });
+  }
+
+  await getAuthenticatedUserName(sessionId);
 
   try {
     switch (req.method) {
       case "POST":
-        const cookies = new Cookies(req, res);
-        cookies.set("sessionId");
-        return res.status(200).json({ message: "Successfully signed out" });
+        console.log(req.body);
 
       default:
         return res.status(405).json({ message: "Method not supported" });

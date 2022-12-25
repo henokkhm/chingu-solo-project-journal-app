@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import Cookies from "cookies";
 
 import { getPasswordHash } from "../../utils/bcrypt-utils";
 import { getUserByUsernameFromDB, writeUserToDB } from "../../data-layer/user";
+import { getAuthenticatedUser } from "../../utils/auth-helpers";
 
 type Data = {
   message: string;
@@ -15,6 +17,16 @@ export default async function handler(
     switch (req.method) {
       case "POST":
         // TODO: Check user is NOT signed in. Only signed out users can create a new user
+        const cookies = new Cookies(req, res);
+        const sessionId = cookies.get("sessionId");
+        const { authenticated } = await getAuthenticatedUser(sessionId);
+
+        if (authenticated) {
+          return res.status(400).json({
+            message:
+              "You are already signed in. Please sign out to create a new account",
+          });
+        }
 
         // Grab the user object
         const newUser = req.body;

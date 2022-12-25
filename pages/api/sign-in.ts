@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { writeSessionToDB } from "../../data-layer/session";
 import { getUserByUsernameFromDB } from "../../data-layer/user";
 import { checkPasswordHash } from "../../utils/bcrypt-utils";
+import { getAuthenticatedUser } from "../../utils/auth-helpers";
 
 type Data = {
   message: string;
@@ -17,7 +18,14 @@ export default async function handler(
   try {
     switch (req.method) {
       case "POST":
-        // TODO: check user is signed out
+        const cookies = new Cookies(req, res);
+
+        // check user is not already signed in
+        const sessionId = cookies.get("sessionId");
+        const { authenticated } = await getAuthenticatedUser(sessionId);
+        if (authenticated) {
+          return res.status(400).json({ message: "You are already signed in" });
+        }
 
         // Grab the user object
         const user = req.body;
@@ -51,14 +59,13 @@ export default async function handler(
         }
 
         // create a random sessionId
-        const sessionId = uuidv4();
+        const newSessionId = uuidv4();
 
         // add session to sessions collection
-        await writeSessionToDB(sessionId, user.userName);
+        await writeSessionToDB(newSessionId, user.userName);
 
         // send cookie to frontend
-        const cookies = new Cookies(req, res);
-        cookies.set("sessionId", sessionId, {
+        cookies.set("sessionId", newSessionId, {
           httpOnly: true,
         });
 
