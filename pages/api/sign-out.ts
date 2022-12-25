@@ -25,6 +25,8 @@ export default async function handler(
           return res.status(401).json({ message: "You are not signed in" });
         }
 
+        // @ts-ignore
+        // previous method call checks that sessionId is not falsy
         await deleteSessionFromDb(sessionId);
 
         cookies.set("sessionId");

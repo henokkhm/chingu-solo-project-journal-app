@@ -1,14 +1,20 @@
 import Cookies from "cookies";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { useRouter } from "next/router";
+import { FC } from "react";
 
 import Header from "../components/header";
 import JournalForm from "../components/forms/journal-form";
 import JournalsWrapper from "../components/journals-wrapper";
 import { getAuthenticatedUser } from "../utils/auth-helpers";
 import { getAllJounalsOfUser } from "../data-layer/journal";
+import { JournalType } from "../types/journal";
 
-export default function Home({ journals }) {
+interface HomeProps {
+  journals: JournalType[];
+}
+
+const Home: FC<HomeProps> = ({ journals }) => {
   const router = useRouter();
 
   const refreshData = () => {
@@ -29,7 +35,7 @@ export default function Home({ journals }) {
       </main>
     </>
   );
-}
+};
 
 export async function getServerSideProps({
   req,
