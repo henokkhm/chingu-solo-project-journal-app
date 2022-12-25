@@ -20,7 +20,7 @@ export async function getJournalByIdFromDB(id: string) {
     body: JSON.stringify({
       ...fetchBody,
       collection: "journals",
-      filter: { _id: id },
+      filter: { _id: { $oid: id } },
     }),
   });
   return await journalData.json();
@@ -72,7 +72,13 @@ export async function updateJournalInDb(
     body: JSON.stringify({
       ...fetchBody,
       collection: "journals",
-      filter: { _id: id },
+      filter: { _id: { $oid: id } },
+      update: {
+        $set: {
+          title,
+          body,
+        },
+      },
     }),
   });
   return await updateJournal.json();

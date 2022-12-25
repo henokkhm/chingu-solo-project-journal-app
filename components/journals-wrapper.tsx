@@ -38,7 +38,7 @@ const JournalsWrapper: FC<JournalWrapperProps> = ({ journalArray }) => {
             title={journal.title}
             body={journal.body}
             key={journal._id}
-            id={journal.id}
+            _id={journal._id}
           />
         ))}
       </Masonry>
