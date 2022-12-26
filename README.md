@@ -1,41 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chingu Solo Project - Journal App
 
-## Getting Started
+### Overview
 
-First, run the development server:
+This project was created for the Chingu Voyage 42 pre-work.
+
+LIVE LINK: https://chingu-solo-project-journal-glqum2f99-henokkh.vercel.app/
+
+### Features
+
+This project is a simple CRUD application that allows users to create an account, sign-in and save their own jorunals. Users cannot see other users' journals. Users can edit and update only their own journals.
+
+### Running the project
+
+This app was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+To run this application, you should have [`Node.js`](https://nodejs.org/en/download/https://nodejs.org/en/download/) installed on your machine.
+
+After cloning this repo, install the project's dependencies using the following command:
+
+```bash
+npm install
+```
+
+The app needs a database to store user data. I used a free [MongoDB Atlas](https://www.mongodb.com/atlas/database) database, using the Data API to perform CRUD operations on the Collections. You can use the .env.local.example file to add your own MongoDB database instance credentials before running the application. (Note: Do not forget to rename the file to .env.local)
+
+To run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Dependencies
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Some of the dependencies of the project include:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-Notes:
-
-Backend:
-
-Database: MongoDB Atlas
-I used the MongoDB Atlas Data API to perform CRUD operations on my MongoDB Collections. I have 3 Collections, namely User, Journal and Session.
+- uuid to create Session IDs when users sign-in
+- bcrypt to hash user's passwords when they sign-up
+- cookies to read cookies from incoming requests
+- formik to manage form data
+- react-masonry-css to create a responsive multi-column cards layout
